@@ -1,0 +1,100 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 m-auto ">
+        <form class="form-container ">
+          <div class="card mt-2 bg-white">
+            <div class="card-title text-center mt-3 ">
+              <img src="../../../assets/images/AvtarNew.png" height="140px" width="140px" class="img-rounded">
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="!registerForm.invalid && saveUser()" #registerForm="ngForm">
+                <div class="input-group mb-3">
+                  <label for="name"></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Name "
+                    [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}"
+                    required="required"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <label for="email"></label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Email "
+                    [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}"
+                    required="required"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <label for="inputPassword"></label>
+                  <input
+                    type="password"
+                    class="form-control password"
+                    id="inputPassword"
+                    name="inputPassword"
+                    placeholder="Password"
+                    [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}"
+                    required="required"
+                    pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <label for="confirmPassword"></label>
+                  <input
+                    type="password"
+                    class="form-control password"
+                    id="confirmPassword"
+                    placeholder="Confirm password"
+                    [(ngModel)]="user.confirmPassword" [ngModelOptions]="{standalone: true}"
+                    name="confirmPassword"
+                    required="required"
+                    confirmEqualValidator="inputPassword"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <label for="phoneNumber"></label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phoneNumber"
+                    minlength="10"
+                    maxlength="10"
+                    placeholder="Mobile Number"
+                    [(ngModel)]="user.contactNumber" [ngModelOptions]="{standalone: true}"
+                    required="required"
+                  />
+                </div>
+
+                <button
+                        type="submit"
+                        class="btn btn-block"
+                        style="background-color: #00b0ff; color: #fff;"
+
+                >
+                  Sign Up</button
+                ><br />
+
+                <p class="float-right mt-2">
+                  Already have an account ?<a
+                  routerLink="/login"
+                  style="color: #00b0ff;"
+                >
+                  Login</a
+                >
+                </p>
+                <br />
+              </form>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
