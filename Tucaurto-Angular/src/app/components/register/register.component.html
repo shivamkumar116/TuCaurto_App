@@ -1,35 +1,43 @@
 <div class="modal-body">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-4 m-auto ">
-        <form class="form-container ">
+      <div class="col-lg-4 m-auto">
+        <form class="form-container">
           <div class="card mt-2 bg-white">
-            <div class="card-title text-center mt-3 ">
-              <img src="../../../assets/images/AvtarNew.png" height="140px" width="140px" class="img-rounded">
+            <div class="card-title text-center mt-3">
+              <img
+                src="../../../assets/images/AvtarNew.png"
+                height="140px"
+                width="140px"
+                class="img-rounded"
+              />
             </div>
             <div class="card-body">
-              <form (ngSubmit)="!registerForm.invalid && saveUser()" #registerForm="ngForm">
+              <form (ngSubmit)="saveUser()" [formGroup]="form">
                 <div class="input-group mb-3">
                   <label for="name"></label>
                   <input
                     type="text"
                     class="form-control"
                     id="name"
+                    name="name"
+                    formControlName="name"
                     placeholder="Name "
-                    [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}"
-                    required="required"
+                    [(ngModel)]="user.name"
+                    required
                   />
                 </div>
                 <div class="input-group mb-3">
                   <label for="email"></label>
                   <input
                     type="email"
+                    name="username"
                     class="form-control"
                     id="email"
                     placeholder="Email "
-                    [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}"
-                    required="required"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    [(ngModel)]="user.username"
+                    formControlName="username"
+                    required
                   />
                 </div>
                 <div class="input-group mb-3">
@@ -38,11 +46,11 @@
                     type="password"
                     class="form-control password"
                     id="inputPassword"
-                    name="inputPassword"
-                    placeholder="Password"
-                    [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}"
-                    required="required"
-                    pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                    name="password"
+                    placeholder="Password minimum length 6"
+                    [(ngModel)]="user.password"
+                    formControlName="password"
+                    required
                   />
                 </div>
                 <div class="input-group mb-3">
@@ -52,10 +60,10 @@
                     class="form-control password"
                     id="confirmPassword"
                     placeholder="Confirm password"
-                    [(ngModel)]="user.confirmPassword" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="user.confirmPassword"
                     name="confirmPassword"
-                    required="required"
-                    confirmEqualValidator="inputPassword"
+                    required
+                    formControlName="confirmPassword"
                   />
                 </div>
                 <div class="input-group mb-3">
@@ -67,27 +75,28 @@
                     minlength="10"
                     maxlength="10"
                     placeholder="Mobile Number"
-                    [(ngModel)]="user.contactNumber" [ngModelOptions]="{standalone: true}"
-                    required="required"
+                    [(ngModel)]="user.contactNumber"
+                    formControlName="contactNumber"
+                    required
                   />
                 </div>
 
                 <button
-                        type="submit"
-                        class="btn btn-block"
-                        style="background-color: #00b0ff; color: #fff;"
-
+                  [disabled]="!form.valid"
+                  type="submit"
+                  class="btn btn-block"
+                  style="background-color: #00b0ff; color: #fff;"
                 >
                   Sign Up</button
                 ><br />
 
                 <p class="float-right mt-2">
                   Already have an account ?<a
-                  routerLink="/login"
-                  style="color: #00b0ff;"
-                >
-                  Login</a
-                >
+                    routerLink="/login"
+                    style="color: #00b0ff;"
+                  >
+                    Login</a
+                  >
                 </p>
                 <br />
               </form>

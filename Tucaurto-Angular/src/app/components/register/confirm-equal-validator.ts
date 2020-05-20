@@ -1,24 +1,21 @@
-import { Validator, NG_VALIDATORS, AbstractControl} from "@angular/forms";
-import { Directive, Input} from "@angular/core";
+import { FormGroup } from '@angular/forms';
 
-@Directive({
-  selector: '[confirmEqualValidator]',
-  providers: [{
-    provide: NG_VALIDATORS,
-    useExisting: ConfirmEqualValidatorDirective,
-    multi: true
-  }]
-})
+// custom validator to check that two fields match
+export function MustMatch(controlName: string, matchingControlName: string) {
+  return (formGroup: FormGroup) => {
+    const control = formGroup.controls[controlName];
+    const matchingControl = formGroup.controls[matchingControlName];
 
-export class ConfirmEqualValidatorDirective implements Validator {
-  @Input() confirmEqualValidator: string;
-  validate(control: AbstractControl): { [key: string]: any} | null {
-    const controlToCompare = control.parent.get(this.confirmEqualValidator);
-    if(controlToCompare && controlToCompare.value !== control.value)
-    {
-      return { 'notEqual': true};
+    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+      // return if another validator has already found an error on the matchingControl
+      return;
     }
 
-    return null;
-  }
+    // set error on matchingControl if validation fails
+    if (control.value !== matchingControl.value) {
+      matchingControl.setErrors({ mustMatch: true });
+    } else {
+      matchingControl.setErrors(null);
+    }
+  };
 }

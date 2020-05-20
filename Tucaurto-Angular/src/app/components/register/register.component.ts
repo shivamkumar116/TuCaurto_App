@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MustMatch } from './confirm-equal-validator';
 
 const baseUrl = 'http://localhost:8080/user/register';
 @Component({
@@ -9,6 +11,7 @@ const baseUrl = 'http://localhost:8080/user/register';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  form: FormGroup;
   user = {
     name: '',
     username: '',
@@ -18,9 +21,29 @@ export class RegisterComponent implements OnInit {
   };
   submitted = false;
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = this.formBuilder.group(
+      {
+        name: [null, Validators.required],
+        username: [null, [Validators.required, Validators.email]],
+        password: [null, [Validators.required, Validators.minLength(6)]],
+        contactNumber: [
+          null,
+          [Validators.required, Validators.pattern('[1-9]{1}[0-9]{9}')],
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validator: MustMatch('password', 'confirmPassword'),
+      }
+    );
+  }
 
   saveUser() {
     const data = {

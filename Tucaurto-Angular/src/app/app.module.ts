@@ -15,13 +15,12 @@ import { TeamsComponent } from './components/teams/teams.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { SignoutComponent } from './components/signout/signout.component';
 import { PropertyViewComponent } from './components/property-view/property-view.component';
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
-import { ConfirmEqualValidatorDirective} from "./components/register/confirm-equal-validator";
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { PostPropertyComponent } from './components/post-property/post-property.component';
 import { MypropertiesComponent } from './components/myproperties/myproperties.component';
 import { PropertyEditComponent } from './components/property-edit/property-edit.component';
-
 
 @NgModule({
   declarations: [
@@ -38,19 +37,19 @@ import { PropertyEditComponent } from './components/property-edit/property-edit.
     ContactUsComponent,
     SignoutComponent,
     PropertyViewComponent,
-    ConfirmEqualValidatorDirective,
+
     PostPropertyComponent,
     MypropertiesComponent,
     PropertyEditComponent,
-
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
