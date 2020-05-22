@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PasswordService } from '../../service/password.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { error } from '@angular/compiler/src/util';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-verify-otp',
@@ -23,9 +25,16 @@ export class VerifyOtpComponent implements OnInit {
   }
   verifyOtp(otp: string) {
     let email = sessionStorage.getItem('temp');
-    this.passwordService.verifyOtp(email, otp).subscribe((data) => {
-      console.log(data);
-      this.router.navigate(['/changepass']);
-    });
+    this.passwordService.verifyOtp(email, otp).subscribe(
+      (data) => {
+        console.log(data);
+        Swal.fire('Info', data, 'info');
+
+        this.router.navigate(['/changepass']);
+      },
+      (error) => {
+        Swal.fire('Error', 'Something went wrong', 'error');
+      }
+    );
   }
 }

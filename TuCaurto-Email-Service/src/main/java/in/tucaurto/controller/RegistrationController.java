@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import in.tucaurto.model.SellerBuyer;
 import in.tucaurto.model.User;
 import in.tucaurto.service.MailService;
 
@@ -36,5 +37,21 @@ public class RegistrationController
 		return "Sent Successfully";
 	}
 
+	@PostMapping("/sharedetails")
+	public String shareDetails(@RequestBody SellerBuyer sellerBuyer)
+	{
+		System.out.println(sellerBuyer.getEmail());
+		
+		try
+		{
+			notificationService.shareDetailEmail(sellerBuyer);
+			
+		} catch (MailException mailException)
+		{
+			System.out.println(mailException);
+		}
+		
+		return "Sent Successfully";
+	}
 	
 }

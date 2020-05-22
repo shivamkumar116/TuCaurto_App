@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
     contactNumber: '',
   };
   submitted = false;
+  loading = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -59,13 +60,17 @@ export class RegisterComponent implements OnInit {
 
     this.httpClient.post(baseUrl, data, { responseType: 'text' }).subscribe(
       (response) => {
+        this.loading = true;
         console.log(response);
         if (response === 'Username already Taken') {
           swal.fire('Error', 'username already taken!! Try again.', 'error');
           this.submitted = false;
+          this.loading = false;
         } else {
+          this.loading = true;
           this.mailService.sendRegisterMail(data).subscribe((response) => {
             console.log(response);
+
             this.submitted = true;
             swal.fire(
               'User created',
@@ -77,6 +82,7 @@ export class RegisterComponent implements OnInit {
         }
       },
       (error) => {
+        this.loading = false;
         swal.fire('Error', 'Something went wrong!', 'error');
       }
     );

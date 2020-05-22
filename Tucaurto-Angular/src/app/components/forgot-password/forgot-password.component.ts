@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PasswordService } from '../../service/password.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-forgot-password',
@@ -25,6 +26,8 @@ export class ForgotPasswordComponent implements OnInit {
   generateOtp(email: string) {
     this.passwordService.generateOtp(email).subscribe((data) => {
       console.log(data);
+      swal.fire('Successs', 'Please check your email', 'success');
+
       sessionStorage.setItem('temp', email);
       this.router.navigate(['/verifyotp']);
     });

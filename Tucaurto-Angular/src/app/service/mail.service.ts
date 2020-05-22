@@ -15,5 +15,9 @@ export class MailService {
       responseType: 'text',
     });
   }
-  e;
+  sendShareDetail(value: any): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/sharedetails`, value, {
+      responseType: 'text',
+    });
+  }
 }

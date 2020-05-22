@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../service/authentication.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         this.invalidLogin = true;
+        swal.fire('Error', 'Please check your credentials', 'error');
         alert('Please check the credentials!!');
       }
     );

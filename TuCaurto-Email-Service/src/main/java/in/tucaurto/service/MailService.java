@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 //import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import in.tucaurto.model.SellerBuyer;
 import in.tucaurto.model.User;
 
 
@@ -38,6 +39,23 @@ public class MailService
 		builder.append("\nYour credentials for logging in are as follows:-\n");
 		builder.append("\nUsername:"+ user.getUsername());
 		builder.append("\nPassword:"+ user.getPassword());
+		builder.append("\nThank you\nTu Caurto Team");
+		
+		
+		mail.setText(builder.toString());
+
+		
+		javaMailSender.send(mail);
+	}
+	
+	public void shareDetailEmail(SellerBuyer sellerBuyer) {
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(sellerBuyer.getEmail());
+		mail.setSubject("Tu Caurto | Asking visit");
+		StringBuilder builder= new StringBuilder("You have query for your property. Details are below:");
+		builder.append("\nUsername:"+ sellerBuyer.getUsername());
+		builder.append("\nProperty Name:"+ sellerBuyer.getName()) ;
+		builder.append("\nProperty Address:"+ sellerBuyer.getAddress()) ;
 		builder.append("\nThank you\nTu Caurto Team");
 		
 		

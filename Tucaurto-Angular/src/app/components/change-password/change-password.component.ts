@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PasswordService } from '../../service/password.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MustMatch } from '../register/confirm-equal-validator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-change-password',
@@ -34,7 +35,7 @@ export class ChangePasswordComponent implements OnInit {
   changePass(password: string) {
     this.passwordService.changePass(this.email, password).subscribe((data) => {
       console.log(data);
-      alert('Password successfully changed!!');
+      Swal.fire('Success', 'Password Successfully changed', 'success');
       this.router.navigate(['/login']);
       sessionStorage.removeItem('temp');
     });

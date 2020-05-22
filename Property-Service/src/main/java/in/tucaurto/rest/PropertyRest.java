@@ -17,80 +17,50 @@ import in.tucaurto.dao.UserDAO;
 import in.tucaurto.entity.Property;
 import in.tucaurto.entity.PropertyType;
 import in.tucaurto.entity.User;
+import in.tucaurto.service.PropertyService;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class PropertyRest {
 
 	@Autowired
-	private PropertyDAO propertyDao;
-
-	@Autowired
-	private PropertyTypeDAO propertyTypeDao;
-
-	@Autowired
-	private UserDAO userDao;
+	private PropertyService propertyService;
 
 	@PostMapping(value = "/properties/{userID}/{propertyTypeID}")
 	public ResponseEntity<Property> saveProperty(@PathVariable String userID, @PathVariable int propertyTypeID,
 			@RequestBody Property property) {
-
-		// getting and setting the propertyType
-		PropertyType propertyType = propertyTypeDao.findById(propertyTypeID).get();
-		property.setType(propertyType);
-
-		// getting and setting the useremail
-		User user = userDao.findByEmail(userID);
-		property.setUser(user);
-
-		// saving the property
-		propertyDao.save(property);
-
-		// returning back the property in response entity
-		return ResponseEntity.ok().body(property);
+		return ResponseEntity.ok().body(propertyService.saveProperty(userID, propertyTypeID, property));
 	}
 
 	@GetMapping("/properties")
 	public ResponseEntity<Iterable<Property>> getProperties() {
 
-		return ResponseEntity.ok().body(propertyDao.findAll());
+		return ResponseEntity.ok().body(propertyService.getProperties());
 	}
 
 
 	@GetMapping("/properties/{propertyID}")
 	public ResponseEntity<Property> getProperty(@PathVariable int propertyID) {
-		return ResponseEntity.ok().body(propertyDao.findById(propertyID).get());
+		return ResponseEntity.ok().body(propertyService.getProperty(propertyID));
 	}
 	
 	@GetMapping("/searchproperties")
 	public ResponseEntity<Iterable<Property>> search(@RequestParam("str" )String str){
-		return ResponseEntity.ok().body(propertyDao.findByNameContaining(str));
+		return ResponseEntity.ok().body(propertyService.search(str));
 	}
 	
 
 	@GetMapping("/properties/filter")
 	public Iterable<Property> getFilteredProperty(@RequestParam(required = false) String city, @RequestParam(required = false) Double price,@RequestParam(required = false )Integer  typeID){
-		PropertyType type=null;
-		type= propertyTypeDao.findById(typeID).get();
-		return propertyDao.findByCityAndPriceGreaterThanEqualAndType(city, price, type);
+	
+		return propertyService.filterProperty(city, price, typeID);
 		
 	}
 
 	@PutMapping("properties/{userID}/{propertyID}/{propertyTypeID}")
 	public ResponseEntity<Property> updateProperty(@PathVariable String userID,@PathVariable int propertyID, @PathVariable int propertyTypeID,@RequestBody Property property){
-		//getting and setting the propertyType
-		PropertyType propertyType = propertyTypeDao.findById(propertyTypeID).get();
-		property.setType(propertyType);
-		
-		//getting and setting the useremail
-		User user = userDao.findByEmail(userID);
-		property.setUser(user);		
-		
-		//saving the property
-		 propertyDao.save(property);
-		 
 		 //returning back the property in response entity
-		 return ResponseEntity.ok().body(property);
+		 return ResponseEntity.ok().body(propertyService.updateProperty(userID, propertyID, propertyTypeID, property));
 		
 	}
 
