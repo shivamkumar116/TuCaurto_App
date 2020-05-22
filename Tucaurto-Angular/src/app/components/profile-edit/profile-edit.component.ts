@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user.service';
 import { User } from '../../common/User';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile-edit',
@@ -17,8 +18,6 @@ export class ProfileEditComponent implements OnInit {
     this.user = new User();
     this.userService.getProfile(sessionStorage.getItem('username')).subscribe(
       (data) => {
-        console.log(data);
-
         this.user = data;
       },
       (error) => console.log(error)
@@ -28,13 +27,18 @@ export class ProfileEditComponent implements OnInit {
     this.userService
       .updateProfile(sessionStorage.getItem('username'), this.user)
       .subscribe(
-        (data) => console.log(data),
+        (data) => {
+          console.log(data);
+          swal.fire(
+            'Success',
+            'Your profile has beedn successfully updated',
+            'success'
+          );
+          this.user = new User();
+          this.gotoIndex();
+        },
         (error) => console.log(error)
       );
-    alert('profile updated!!');
-    // alert('Good job!', 'Profile successfully updated', 'success');
-    this.user = new User();
-    this.gotoIndex();
   }
 
   onSubmit() {

@@ -3,8 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MustMatch } from './confirm-equal-validator';
+import { MailService } from 'src/app/service/mail.service';
+import swal from 'sweetalert2';
+import { User } from 'src/app/service/authentication.service';
 
-const baseUrl = 'http://localhost:8080/user/register';
+const baseUrl = 'http://localhost:8001/user/register';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -24,7 +27,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private mailService: MailService
   ) {}
 
   ngOnInit() {
@@ -56,19 +60,25 @@ export class RegisterComponent implements OnInit {
     this.httpClient.post(baseUrl, data, { responseType: 'text' }).subscribe(
       (response) => {
         console.log(response);
-        if (response === 'Username already Taken!') {
-          alert('username already taken!! Try again.');
+        if (response === 'Username already Taken') {
+          swal.fire('Error', 'username already taken!! Try again.', 'error');
           this.submitted = false;
         } else {
-          this.submitted = true;
-          alert('user created!!');
+          this.mailService.sendRegisterMail(data).subscribe((response) => {
+            console.log(response);
+            this.submitted = true;
+            swal.fire(
+              'User created',
+              'Your account has been successfully created',
+              'success'
+            );
+            this.router.navigate(['/login']);
+          });
         }
       },
       (error) => {
-        console.log(error);
-        alert(error);
+        swal.fire('Error', 'Something went wrong!', 'error');
       }
     );
-    this.router.navigate(['login']);
   }
 }

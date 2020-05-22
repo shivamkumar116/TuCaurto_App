@@ -36,4 +36,10 @@ export class IndexComponent implements OnInit {
       console.log(city, price, type);
     }
   }
+
+  search(str: string) {
+    this.propertyService.findByNameContaining(str).subscribe((data) => {
+      this.properties = data;
+    });
+  }
 }

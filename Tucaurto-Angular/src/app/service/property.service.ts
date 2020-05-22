@@ -8,8 +8,7 @@ import { retry } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class PropertyService {
-  private baseUrl = 'http://localhost:8002/properties';
-  user = sessionStorage.getItem('username');
+  private baseUrl = 'http://localhost:8004/property-service/properties';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -37,24 +36,23 @@ export class PropertyService {
 
   //post a property
   postproperty(Property: Object, type: number) {
-    return this.httpClient.post(
-      `${this.baseUrl}/${this.user}/${type}`,
-      Property
-    );
+    let user = sessionStorage.getItem('username');
+    return this.httpClient.post(`${this.baseUrl}/${user}/${type}`, Property);
   }
 
   //update Property
   updateProperty(propertyID: number, type: number, value: any) {
+    let user = sessionStorage.getItem('username');
     return this.httpClient.put(
-      `${this.baseUrl}/${this.user}/${propertyID}/${type}`,
+      `${this.baseUrl}/${user}/${propertyID}/${type}`,
       value
     );
   }
 
   //find by name containing
-  findByNameContaining(str: string) {
-    return this.httpClient.get(
-      `http://localhost:8002/searchproperties?str=${str}`
+  findByNameContaining(str: string): Observable<any> {
+    return this.httpClient.get<any>(
+      `http://localhost:8004/property-service/searchproperties?str=${str}`
     );
   }
 }

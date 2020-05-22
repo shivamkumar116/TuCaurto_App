@@ -35,6 +35,7 @@ public class UserRest {
 		return propertyDao.findByUser(user);
 	}
 
+
 	// Method for user to get his profile
 	@GetMapping("/myprofile/{userID}")
 	public ResponseEntity<User> getMyProfile(@PathVariable String userID) {

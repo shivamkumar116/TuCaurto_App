@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Property } from 'src/app/common/Property';
 import { PropertyService } from 'src/app/service/property.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-property-edit',
@@ -34,7 +35,7 @@ export class PropertyEditComponent implements OnInit {
       .updateProperty(this.id, type, this.property)
       .subscribe((data) => {
         console.log(data);
-        alert('Successfully updated');
+        swal.fire('Success', 'Successfully updated', 'success');
         this.gotoList();
       });
   }

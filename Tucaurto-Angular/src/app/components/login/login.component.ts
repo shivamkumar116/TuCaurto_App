@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../service/authentication.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  form: FormGroup;
+
   username = '';
   password = '';
   @Input() error: string | null;
@@ -15,10 +18,16 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public loginservice: AuthenticationService
+    public loginservice: AuthenticationService,
+    private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      username: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+    });
+  }
 
   checkLogin() {
     this.loginservice.authenticate(this.username, this.password).subscribe(

@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostPropertyComponent } from './components/post-property/post-property.component';
 import { MypropertiesComponent } from './components/myproperties/myproperties.component';
 import { PropertyEditComponent } from './components/property-edit/property-edit.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { PropertyEditComponent } from './components/property-edit/property-edit.
     PostPropertyComponent,
     MypropertiesComponent,
     PropertyEditComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

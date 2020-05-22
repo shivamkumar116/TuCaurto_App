@@ -1,8 +1,10 @@
 package in.tucaurto.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,16 +54,20 @@ public class Property {
 	
 	
 	@ManyToOne
-    @JoinColumn(name = "propertyType_id", nullable = false)
-    @JsonBackReference
+
     private PropertyType type;
 	
 	
-	  @ManyToOne
-	  @JoinColumn(name="user_id", nullable=false) 
-	  @JsonIgnore
+	@ManyToOne
+	
 	  private User user;
-	 
+
+
+	@Override
+	public String toString() {
+		return "Property [id=" + id + ", name=" + name + ", description=" + description + ", address=" + address
+				+ ", price=" + price + ", imageUrl=" + imageUrl + ", city=" + city+" ]";
+	}
 	
 	
 }

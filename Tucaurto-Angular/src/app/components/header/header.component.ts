@@ -9,24 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  // //isUserLoggedIn:boolean=false;
-  // @Output() public found = new EventEmitter<any>();
-  constructor(
-    public basicAuth: AuthenticationService,
-    private propertyService: PropertyService,
-    private router: Router
-  ) {}
+  constructor(public basicAuth: AuthenticationService) {}
 
   ngOnInit(): void {}
-
-  search(str: string) {
-    if (sessionStorage.getItem('username') === null) {
-      alert('please login to search the properties');
-      this.router.navigate(['/login']);
-    } else {
-      this.propertyService.findByNameContaining(str).subscribe((data) => {
-        console.log(data);
-      });
-    }
-  }
 }

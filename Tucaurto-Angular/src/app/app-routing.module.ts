@@ -14,6 +14,7 @@ import { PropertyViewComponent } from './components/property-view/property-view.
 import { PostPropertyComponent } from './components/post-property/post-property.component';
 import { MypropertiesComponent } from './components/myproperties/myproperties.component';
 import { PropertyEditComponent } from './components/property-edit/property-edit.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'contactus', component: ContactUsComponent },
   { path: 'teams', component: TeamsComponent },
+  { path: 'forgotpass', component: ForgotPasswordComponent },
   {
     path: 'myproperties',
     component: MypropertiesComponent,

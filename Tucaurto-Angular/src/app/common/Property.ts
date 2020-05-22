@@ -1,3 +1,5 @@
+import { User } from './User';
+import { Type } from './Type';
 export class Property {
   id: number;
   name: string;
@@ -7,4 +9,6 @@ export class Property {
   isAvailable: boolean;
   imageUrl: string;
   city: string;
+  user: User;
+  type: Type;
 }

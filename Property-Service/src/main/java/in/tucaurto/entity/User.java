@@ -1,5 +1,6 @@
 package in.tucaurto.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -8,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,9 +38,9 @@ public class User {
 	
 	
 	
-	  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user") 
-	  @JsonIgnore
-	  private Set<Property> property;
+	  @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE,CascadeType.DETACH}, mappedBy = "user") 
+	  @JsonBackReference
+	  private List<Property> property;
 	 
 	
 

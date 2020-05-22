@@ -31,7 +31,7 @@ public class PropertyRest {
 	@Autowired
 	private UserDAO userDao;
 
-	@PostMapping(value = "/properties/{userID}/{propertyTypeID}", consumes = "application/json", produces = "application/json")
+	@PostMapping(value = "/properties/{userID}/{propertyTypeID}")
 	public ResponseEntity<Property> saveProperty(@PathVariable String userID, @PathVariable int propertyTypeID,
 			@RequestBody Property property) {
 
