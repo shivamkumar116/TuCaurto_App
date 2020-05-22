@@ -1,0 +1,40 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 m-auto">
+        <form class="form-container">
+          <div class="card mt-2 bg-white">
+            <div class="card-body">
+              <form (ngSubmit)="verifyOtp(otp.value)" [formGroup]="form">
+                <div class="input-group mb-3">
+                  <label for="otp"></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="otp"
+                    name="otp"
+                    formControlName="otp"
+                    placeholder="OTP "
+                    #otp
+                    required
+                  />
+                </div>
+                <br />
+                <button
+                  [disabled]="!form.valid"
+                  type="submit"
+                  class="btn btn-block"
+                  style="background-color: #00b0ff; color: #fff;"
+                >
+                  Verify</button
+                ><br />
+
+                <br />
+              </form>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,9 @@ export class MailService {
   constructor(private httpClient: HttpClient) {}
 
   sendRegisterMail(value: any): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/send-mail`, value,{ responseType: 'text' });
+    return this.httpClient.post(`${this.baseUrl}/send-mail`, value, {
+      responseType: 'text',
+    });
   }
+  e;
 }

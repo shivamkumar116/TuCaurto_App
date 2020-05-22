@@ -22,6 +22,8 @@ import { PostPropertyComponent } from './components/post-property/post-property.
 import { MypropertiesComponent } from './components/myproperties/myproperties.component';
 import { PropertyEditComponent } from './components/property-edit/property-edit.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { VerifyOtpComponent } from './components/verify-otp/verify-otp.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     MypropertiesComponent,
     PropertyEditComponent,
     ForgotPasswordComponent,
+    VerifyOtpComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

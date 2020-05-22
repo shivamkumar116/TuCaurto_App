@@ -9,9 +9,9 @@ import { retry } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserService {
-  profileUrl = 'http://localhost:8004/property-service/myprofile';
+  profileUrl = 'http://localhost:8004/property-service';
 
-  mypropertiesUrl = 'http://localhost:8004/property-service/myproperties';
+  mypropertiesUrl = 'http://localhost:8004/property-service';
 
   constructor(private httpClient: HttpClient) {}
 
