@@ -8,4 +8,5 @@ public interface PropertyService
 {
 	public List<Property> findAll();
 	public String deleteByPropertyId(long id);
+	public Long getCount();
 }

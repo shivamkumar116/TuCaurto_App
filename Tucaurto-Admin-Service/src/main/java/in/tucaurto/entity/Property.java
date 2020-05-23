@@ -5,11 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -32,6 +30,26 @@ public class Property {
 
 	@Column(name = "property_price")
 	private Double price;
+
+	@Column(name = "property_image")
+	private String imageUrl;
+
+	@Column(name = "property_city")
+	private String city;
+
+	@ManyToOne
+	@JsonIgnore
+	private PropertyType type;
+
+	@ManyToOne
+	@JsonIgnore
+	private User user;
+
+	@Override
+	public String toString() {
+		return "Property [id=" + id + ", name=" + name + ", description=" + description + ", address=" + address
+				+ ", price=" + price + ", imageUrl=" + imageUrl + ", city=" + city + " ]";
+	}
 
 	public int getId() {
 		return id;
@@ -105,22 +123,6 @@ public class Property {
 		this.user = user;
 	}
 
-	@Column(name = "property_image")
-	private String imageUrl;
-
-	@Column(name = "property_city")
-	private String city;
-
-	@ManyToOne
-	@JoinColumn(name = "propertyType_id", nullable = false)
-	@JsonBackReference
-	private PropertyType type;
-
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	@JsonIgnore
-	private User user;
-
 	public Property() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -139,5 +141,7 @@ public class Property {
 		this.type = type;
 		this.user = user;
 	}
+	
+	
 
 }

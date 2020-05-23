@@ -31,14 +31,15 @@ public class UserLogin
     @JsonIgnore
     private String password;
     
+    @Column
+    @JsonIgnore
+    private String otp;
+    
     @JsonIgnore
     @OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="userLogin")
     private User user;
     
-    @JsonIgnore
-    @OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="userLogin")
-    private CustomerSupport customerSupport;
-    
+ 
     @ManyToOne(optional = false)
     @JoinColumn(name="role_id")
     private Role role;

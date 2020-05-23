@@ -1,0 +1,87 @@
+
+<div class="team-clean">
+  <div class="container">
+    <div class="intro">
+      <h2 class="text-center" style="width: 510px;">
+        The Support team is here to help.
+      </h2>
+      <p class="text-center">
+        Our current response time is about 10 minutes.
+      </p>
+    </div>
+    <div class="row people">
+      <div
+        class="col-md-6 col-lg-4 col-xl-2 offset-xl-1 item"
+        style="width: 300px;"
+      >
+        <img class="rounded-circle" src="../../../assets/images/AvtarNew.png" />
+        <h3 class="name">Aayush</h3>
+      </div>
+      <div
+        class="col-md-6 col-lg-4 col-xl-2 offset-xl-0 item"
+        style="width: 300px;"
+      >
+        <img class="rounded-circle" src="../../../assets/images/AvtarNew.png" />
+        <h3 class="name">Bhanu</h3>
+      </div>
+      <div class="col-md-6 col-lg-4 col-xl-2 item" style="width: 300px;">
+        <img class="rounded-circle" src="../../../assets/images/AvtarNew.png" />
+        <h3 class="name">Sai</h3>
+      </div>
+      <div
+        class="col-md-6 col-lg-4 col-xl-2 offset-xl-0 item"
+        style="width: 300px;"
+      >
+        <img class="rounded-circle" src="../../../assets/images/AvtarNew.png" />
+        <h3 class="name">Shivam</h3>
+      </div>
+      <div
+        class="col-md-6 col-lg-4 col-xl-2 offset-xl-0 item"
+        style="width: 300px;"
+      >
+        <img class="rounded-circle" src="../../../assets/images/AvtarNew.png" />
+        <h3 class="name">Thoufiq</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="contact-clean">
+  <form (ngSubmit)="collectFeedback()">
+    <h2 class="text-center">Feedback</h2>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        placeholder="Name"
+        [(ngModel)]="feedback.name"
+        required="required"
+
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control is-invalid"
+        type="email"
+        name="email"
+        placeholder="Email"
+        [(ngModel)]="feedback.email"
+        required="required"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      />
+    </div>
+    <div class="form-group">
+          <textarea
+            class="form-control"
+            name="message"
+            placeholder="Message"
+            [(ngModel)]="feedback.message"
+            rows="14"
+            required="required"
+          ></textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">send</button>
+    </div>
+  </form>
+</div>

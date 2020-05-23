@@ -1,9 +1,8 @@
 package in.tucaurto.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.tucaurto.entity.Property;
 import in.tucaurto.service.PropertyService;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/property-api")
 public class PropertyController 
@@ -33,9 +32,15 @@ public class PropertyController
 	}
 	
 	@GetMapping("/properties")
-	public ResponseEntity<List<Property>> listProperties()
+	public Iterable<Property> listProperties()
 	{
-		return ResponseEntity.ok().body(propertyService.findAll());
+		return propertyService.findAll();
 		
+	}
+	
+	@GetMapping("/properties/getcount")
+	public Long getCount()
+	{
+		return propertyService.getCount();
 	}
 }

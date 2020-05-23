@@ -1,0 +1,76 @@
+<div class="container mb-3">
+  <div class="row">
+    <br />
+    <div class="col text-center mb-5">
+      <h2>Admin Dashboard</h2>
+      <p>“It's not a faith in technology. It's faith in people.”</p>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col feed">
+      <div class="counter">
+        <i class="fa fa-users fa-2x"></i>
+        <h2 class="timer count-title count-number">{{userCount}}</h2>
+        <p class="count-text">Users</p>
+      </div>
+    </div>
+    <div class="col feed">
+      <div class="counter">
+        <i class="fa fa-home fa-2x"></i>
+        <h2 class="timer count-title count-number">{{propCount}}</h2>
+        <p class="count-text">Properties</p>
+      </div>
+    </div>
+    <div class="col feed" routerLink="/feedback-list">
+      <div class="counter">
+        <i class="fa fa-envelope fa-2x"></i>
+        <h2 class="timer count-title count-number">{{feedCount}}</h2>
+        <p class="count-text">Feedbacks</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col table-responsive">
+      <h2>Users List</h2>
+      <table class="table table-hover table-bordered scroll">
+        <thead class="bg-mycolor">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>City</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.contactNumber}}</td>
+          <td>{{user.city}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col table-responsive">
+      <h2>Properties List</h2>
+      <table class="table table-hover table-bordered">
+        <thead class="bg-mycolor">
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let prop of properties">
+          <td>{{prop.name}}</td>
+          <td>{{prop.city}}</td>
+          <td>{{prop.price}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

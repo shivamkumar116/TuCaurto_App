@@ -46,22 +46,6 @@ public class UserServiceImpl implements UserService
 			return "No user found!!";
 		
 	}
-	
-
-	@Override
-	public List<User> findByNameContaining(String name) {
-		return userDao.findByNameContaining(name);
-	}
-
-	@Override
-	public List<User> findByCity(String city) {
-		return userDao.findByCity(city);
-	}
-
-	@Override
-	public User findByContactNumber(long contactNumber) {
-		return userDao.findByContactNumber(contactNumber);
-	}
 
 
 	@Override
@@ -84,6 +68,11 @@ public class UserServiceImpl implements UserService
 		user.setPincode(userDto.getPincode());
 		user.setUserLogin(user.getUserLogin());
 		return ResponseEntity.ok().body(userDao.save(user));
+	}
+
+	@Override
+	public Long getCount() {
+		return userDao.countProp();
 	}
 
 	

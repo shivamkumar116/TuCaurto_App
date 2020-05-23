@@ -1,5 +1,6 @@
 package in.tucaurto.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -24,11 +26,11 @@ public class PropertyType {
 
 	private String description;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "type")
-	@JsonManagedReference
-	private Set<Property> property;
+	@OneToMany(mappedBy = "type")
+	@JsonBackReference
+	private List<Property> property;
 
-	public PropertyType(int id, String type, String description, Set<Property> property) {
+	public PropertyType(int id, String type, String description, List<Property> property) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -65,14 +67,12 @@ public class PropertyType {
 		this.description = description;
 	}
 
-	public Set<Property> getProperty() {
+	public List<Property> getProperty() {
 		return property;
 	}
 
-	public void setProperty(Set<Property> property) {
+	public void setProperty(List<Property> property) {
 		this.property = property;
 	}
-	
-	
 
 }

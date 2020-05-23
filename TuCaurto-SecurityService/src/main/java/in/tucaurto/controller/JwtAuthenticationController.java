@@ -25,7 +25,7 @@ import in.tucaurto.service.EmailSenderService;
 import in.tucaurto.service.JwtUserDetailsService;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 public class JwtAuthenticationController {
 
 	@Autowired

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<aop-reference-model>
-<aop-project name="TuCaurto-Admin-Server"/>
-<aop-project name="TuCaurto-Email-Service"/>
-<aop-project name="TuCaurto-Eureka-Server"/>
-<aop-project name="TuCaurto-Zull-Proxy"/>
-<aop-project name="Property-Service"/>
-<aop-project name="TuCaurto-SecurityService"/>
-</aop-reference-model>

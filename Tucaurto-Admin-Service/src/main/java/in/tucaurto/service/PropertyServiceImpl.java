@@ -26,4 +26,10 @@ public class PropertyServiceImpl implements PropertyService
 		return "Property Deleted";
 	}
 
+	@Override
+	public Long getCount() {
+		
+		return propertyDao.countProp();
+	}
+
 }
